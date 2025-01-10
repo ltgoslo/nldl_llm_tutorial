@@ -1,3 +1,18 @@
+# ---
+# jupyter:
+#   jupytext:
+#     formats: ipynb,py
+#     text_representation:
+#       extension: .py
+#       format_name: light
+#       format_version: '1.5'
+#       jupytext_version: 1.16.6
+#   kernelspec:
+#     display_name: Python 3
+#     language: python
+#     name: python3
+# ---
+
 import sys
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -24,7 +39,6 @@ for question in tqdm(questions):
         {"role": "user", "content": question}
     ]
     gen_input = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_tensors="pt")
-
     output = model.generate(
         gen_input,
         max_new_tokens=12,
@@ -45,4 +59,3 @@ for q, r in zip(questions, responses):
     print(r)
     print("====================")
 print(f"Generating responses took {int(end - start)} seconds")
-
